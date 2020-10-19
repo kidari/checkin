@@ -57,7 +57,7 @@ if __name__ == '__main__':
     #163邮箱服务器地址
     mail_host = 'smtp.126.com'  
     #163用户名
-    mail_user = os.environ["NETEASE_USERNAME"].split("@")[0]  
+    mail_user = 'sunduo88772922'  
     #密码(部分邮箱为授权码) 
     mail_pass = os.environ["SENDER_KEY"]  
     #邮件发送方邮箱地址
