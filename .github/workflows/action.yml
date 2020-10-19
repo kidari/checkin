@@ -5,25 +5,23 @@ on:
     branches: 
       - master
   schedule:
-    - cron: '0 22,14 * * *'
-  watch:
-    types: started
+    - cron: '0 22 * * *'
+
 jobs:
   netease:
     runs-on: ubuntu-latest
     steps:
     - name: 'Checkout codes'
       uses: actions/checkout@v2
-    - name: 'Set python'
-      uses: actions/setup-python@v1
+    - name: '初始化Python'
+      uses: actions/setup-python@v2
       with:
-        python-version: '3.x'
-    - name: 'Install dependencies'
-      run: python -m pip install --upgrade DecryptLogin
-    - name: 'signin'
+        python-version: '3.7'
+    - name: '签到'
       env:
-        NETEASE_USERNAME: ${{ secrets.NETEASE_USERNAME }}
+        NETEASE_PHONE: ${{ secrets.NETEASE_PHONE }}
         NETEASE_PASSWORD: ${{ secrets.NETEASE_PASSWORD }}
+        SENDER_USERNAME: ${{ secrets.SENDER_USERNAME }}
         SENDER_KEY: ${{ secrets.SENDER_KEY }}
         RECEIVERS_NAMES: ${{ secrets.RECEIVERS_NAMES }}
       run: python checkin.py
