@@ -93,7 +93,7 @@ if __name__ == '__main__':
     receivers = os.environ["RECEIVERS_NAMES"].split(",")
     #设置email信息
     #邮件内容设置
-    content = str1+' '+str2+time.strftime('%H:%M:%S', time.localtime())
+    content = str1+' '+str2+time.strftime('%H:%M:%S', time.localtime(time.time()+28800))
     message = MIMEText(content,'plain','utf-8')
     #邮件主题       
     message['Subject'] = Header('网易云音乐签到', 'utf-8')
