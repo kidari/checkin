@@ -30,6 +30,7 @@ def contextStr(str='==='):
           "text": str
       }
   } 
+  return context
 '''run'''
 if __name__ == '__main__':
     userphone = os.environ["NETEASE_PHONE"]
