@@ -89,3 +89,4 @@ if __name__ == '__main__':
     roburl = os.environ["MSG_ROB"]
     resultStr = contextStr(str1+" \n"+str2+" \n"+time.strftime('%H:%M:%S', time.localtime(time.time()+28800)))
     res=requests.post(url=roburl,data=json.dumps(resultStr),headers={"Content-type": "application/json; charset=utf-8"})
+    print(resultStr)
