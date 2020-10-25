@@ -23,7 +23,5 @@ jobs:
       env:
         NETEASE_PHONE: ${{ secrets.NETEASE_PHONE }}
         NETEASE_PASSWORD: ${{ secrets.NETEASE_PASSWORD }}
-        SENDER_USERNAME: ${{ secrets.SENDER_USERNAME }}
-        SENDER_KEY: ${{ secrets.SENDER_KEY }}
-        RECEIVERS_NAMES: ${{ secrets.RECEIVERS_NAMES }}
+        MSG_ROB: ${{ secrets.MSG_ROB }}
       run: python checkin.py
