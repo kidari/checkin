@@ -23,7 +23,13 @@ def md5(str):
     return hl.hexdigest()
 def protect(text):
     return {"params":encrypt('TA3YiYCfY2dDJQgg',encrypt('0CoJUm6Qyw8W8jud',text)),"encSecKey":"84ca47bca10bad09a6b04c5c927ef077d9b9f1e37098aa3eac6ea70eb59df0aa28b691b7e75e4f1f9831754919ea784c8f74fbfadf2898b0be17849fd656060162857830e241aba44991601f137624094c114ea8d17bce815b0cd4e5b8e2fbaba978c6d1d14dc3d1faf852bdd28818031ccdaaa13a6018e1024e2aae98844210"}
-
+def contextStr(str='==='):
+  context={
+      "msg_type": "text",
+      "content": {
+          "text": str
+      }
+  } 
 '''run'''
 if __name__ == '__main__':
     userphone = os.environ["NETEASE_PHONE"]
@@ -80,41 +86,6 @@ if __name__ == '__main__':
             str2+= ("PC端签到成功，经验+"+str(object['point']))
         else:
             str2+= ("PC端重复签到")
-    #设置服务器所需信息
-    #163邮箱服务器地址
-    mail_host = 'smtp.126.com'  
-    #163用户名
-    mail_user = os.environ["SENDER_USERNAME"]
-    #密码(部分邮箱为授权码) 
-    mail_pass = os.environ["SENDER_KEY"]
-    #邮件发送方邮箱地址
-    sender = os.environ["SENDER_USERNAME"]
-    #邮件接受方邮箱地址，注意需要[]包裹，这意味着你可以写多个邮件地址群发
-    receivers = os.environ["RECEIVERS_NAMES"].split(",")
-    #设置email信息
-    #邮件内容设置
-    content = str1+' '+str2+time.strftime('%H:%M:%S', time.localtime(time.time()+28800))
-    message = MIMEText(content,'plain','utf-8')
-    #邮件主题       
-    message['Subject'] = Header('网易云音乐签到', 'utf-8')
-    #发送方信息
-    message['From'] = sender 
-    #接受方信息     
-    message['To'] = receivers[0]
-    #登录并发送邮件
-    try:
-        smtpObj = smtplib.SMTP() 
-        # 连接到服务器
-        smtpObj.connect(mail_host,25)
-        #######替换为########
-        # smtpObj = smtplib.SMTP_SSL(mail_host)
-        #登录到服务器
-        smtpObj.login(mail_user,mail_pass) 
-        #发送
-        smtpObj.sendmail(
-            sender,receivers,message.as_string()) 
-        #退出
-        smtpObj.quit() 
-        print('success')
-    except smtplib.SMTPException as e:
-        print('error',e) #打印错误
+    roburl = os.environ["MSG_ROB"]
+    resultStr = contextStr(str1+" \n"+str2+" \n"+time.strftime('%H:%M:%S', time.localtime(time.time()+28800)))
+    res=resquests.post(url=roburl,data=protect(json.dumps(resultStr)),headers={"Content-type": "application/json; charset=utf-8"})
