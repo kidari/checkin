@@ -1,3 +1,2 @@
 pycryptodome
 requests
-0506
